@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient
 const PORT = 3000
 require('dotenv').config()
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors())
 
 app.get('/',(request, response)=>{
     db.collection('cards').find().sort({likes: -1}).toArray()
